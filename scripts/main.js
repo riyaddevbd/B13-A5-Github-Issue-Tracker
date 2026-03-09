@@ -10,6 +10,7 @@ statusTabs.forEach((tab) => {
   });
 });
 
+//function to toggle status styles based on clicking button
 const toggleStatus = (clickedTab) => {
   statusTabs.forEach((tab) => {
     tab.classList.remove("btn-primary");
@@ -17,7 +18,7 @@ const toggleStatus = (clickedTab) => {
   clickedTab.classList.add("btn-primary");
 };
 
-
+// function to fetch data from api
 const loadCommits = async (status) => {
     controlSpinner(true);
   const issuesUrl = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
@@ -28,11 +29,12 @@ const loadCommits = async (status) => {
 };
 
 const displayIssues = (issues, status) => {
+  // Get the issue card container and make it empty
   const issuesContainer = document.getElementById("issues-container");
   issuesContainer.innerHTML = "";
 
   issues.forEach((issue) => {
-
+    //get the priority texts
     const priority = issue.priority;
     if (status === "all") {
       const issueDiv = document.createElement("div");
@@ -115,6 +117,7 @@ const displayIssues = (issues, status) => {
   });
 };
 
+//function to set border color based on status
 const borderColor = (status) => {
   if (status === "open") {
     return "#00A96E";
@@ -123,6 +126,8 @@ const borderColor = (status) => {
     return "#A855F7";
   }
 };
+
+//function to display labels
 const displayLabel = (labels) => {
   const createElement = labels.map(
     (el) =>
@@ -131,7 +136,7 @@ const displayLabel = (labels) => {
   return createElement.join(" ");
 };
 
-
+//function to set counter
 const setCounter = (status) =>{
     const counter = document.getElementById("issues-counter");
 
@@ -152,12 +157,14 @@ const setCounter = (status) =>{
     })
 };
 
+//function to load issue details by clicking on issue card
 const loadDetails = (id) => {
     fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`)
     .then(res=> res.json())
     .then(data => displayDetails(data.data));
 };
 
+//function to display details with a modal
 const displayDetails = (issues) => {
     const detailsContainer = document.getElementById("details-container");
     detailsContainer.innerHTML = `
@@ -193,6 +200,7 @@ const displayDetails = (issues) => {
     document.getElementById("issue_details").showModal();
 }
 
+// function to control spinner 
 const controlSpinner = (status) => {
     if(status){
         document.getElementById("spinner").classList.remove('hidden');
@@ -203,8 +211,9 @@ const controlSpinner = (status) => {
     }
 }
 
+// function to search issues
 document.getElementById("search-btn").addEventListener('click', () => {
-
+    //get the value from search input 
     const searchInput = document.getElementById("search-input");
     const searchValue = searchInput.value.trim().toLowerCase();
     if(searchValue === ''){
@@ -212,6 +221,7 @@ document.getElementById("search-btn").addEventListener('click', () => {
         return;
     }
     
+    // fetch and get the data from api 
     fetch(
       `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchValue}`,
     )
