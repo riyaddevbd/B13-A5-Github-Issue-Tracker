@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Github Issue Tracker | Main</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+    <link rel="stylesheet" href="./styles/style.css">
+
+
+    <link rel="shortcut icon" href="./assets/github-logo.png" type="image/x-icon">
+</head>
+
+<body class="bg-[#F8FAFC]">
+
+    <header class="py-6 px-20 bg-base-100 flex flex-col md:flex-row gap-5 md:justify-between items-center rounded-lg ">
+        <div class="flex items-center gap-2">
+            <div><img class="w-12" src="./assets/github-logo.png" alt="Github logo"></div>
+            <h2 class="text-2xl font-semibold text-[#1F2937]">GitHub Issues Tracker</h2>
+        </div>
+
+        <div class="flex">
+            <div>
+                <input id="search-input" class="input rounded-lg" type="text" placeholder="Search issues" required />
+            </div>
+            <button id="search-btn" class="btn btn-primary rounded-lg ml-2">Search</button>
+        </div>
+    </header>
+
+    <section class="my-10 w-11/12 md:w-10/12 mx-auto space-y-5">
+
+        <div id="status-tabs" class="flex bg-base-100 px-4 py-5 gap-5 justify-center md:justify-start">
+            <button value="all" class="status-btn btn btn-primary md:w-28" type="button">All</button>
+            <button value="open" class="status-btn btn md:w-28" type="button">Open</button>
+            <button value="closed" class="status-btn md:w-28 btn" type="button">Closed</button>
+        </div>
+
+        <div class="flex bg-base-100 p-4 gap-5 justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div><img src="./assets/Aperture.png"></div>
+
+                <div>
+                    <h3 class="text-lg md:text-xl font-semibold text-[#1F2937]"><span id="issues-counter"></span> Issues</h3>
+                    <p class="text-[#64748B] text-xs md:text-base w-10/12 md:w-full">Track and manage your project issues</p>
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row gap-5">
+                <div class="flex gap-1 items-center">
+                    <div><img src="./assets/Open-Status.png"></div>
+                    <p class="font-medium text-xs md:text-base text-[#1F2937]">Open</p>
+                </div>
+
+                <div class="flex gap-1 items-center">
+                    <div><img src="./assets/Closed-Status.png"></div>
+                    <p class="font-medium text-xs md:text-base text-[#1F2937]">Closed</span></p>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="spinner" class="text-center py-20 hidden"><span class="loading loading-bars loading-xl"></span></div>
+
+
+        <section id="issues-container" class="mx-3 bg-[#FBFBFB] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+        
+        </section>
+
+         <section>
+            <dialog id="issue_details" class="modal">
+                <div class="modal-box">
+                    
+                        <div id="details-container"></div>
+
+                        <form method="dialog">
+                            <button class="btn btn-primary">Close</button>
+                        </form>
+                    </div>
+                </div>
+            </dialog>
+         </section>
+         
+    </section>
+
+    <script src="./scripts/main.js"></script>
+</body>
+
+</html>
